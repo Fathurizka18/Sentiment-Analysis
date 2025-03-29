@@ -18,7 +18,7 @@ def load_data():
         st.error(f"❌ File '{file_path}' tidak ditemukan. Pastikan file ada di repositori GitHub!")
         return None
 
-    df = pd.read_csv(file_path, compression="gzip", low_memory=False)
+    df = pd.read_csv("twitter_data_cleaned.csv.gz", compression="gzip", low_memory=False)
     df["created_at"] = pd.to_datetime(df["created_at"], errors="coerce")
     df.fillna("Unknown", inplace=True)
     
@@ -72,12 +72,14 @@ if menu == "EDA":
 
     # 🔹 Distribusi Retweets & Likes
     st.subheader("📊 Distribusi Retweets & Likes")
+    st.write(df.columns)
     fig, ax = plt.subplots(1, 2, figsize=(12, 5))
-    sns.histplot(df["retweets"], bins=30, kde=True, ax=ax[0], color="blue")
+    sns.histplot(df["retweet_count"], bins=30, kde=True, ax=ax[0], color="blue")
     ax[0].set_title("Distribusi Retweets")
     sns.histplot(df["likes"], bins=30, kde=True, ax=ax[1], color="green")
     ax[1].set_title("Distribusi Likes")
     st.pyplot(fig)
+    print(df.columns)
 
     # 🔹 Top 10 Pengguna Paling Aktif
     st.subheader("👤 Top 10 Pengguna Paling Aktif")
