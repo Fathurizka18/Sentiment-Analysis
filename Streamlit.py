@@ -14,10 +14,15 @@ import os
 def load_data():
     file_path = "twitter_data_cleaned.csv.gz"
 
-    # Pastikan file ada
     if not os.path.exists(file_path):
         st.error(f"❌ File '{file_path}' tidak ditemukan. Pastikan file ada di repositori GitHub!")
         return None
+
+    df = pd.read_csv(file_path, compression="gzip", low_memory=False)
+    df["created_at"] = pd.to_datetime(df["created_at"], errors="coerce")
+    df.fillna("Unknown", inplace=True)
+    
+    return df
 
     df = pd.read_csv(file_path, compression="gzip", low_memory=False)
     
