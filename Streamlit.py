@@ -80,4 +80,6 @@ if menu == "EDA":
     st.pyplot(fig)
 
     # 🔹 Top 10 Pengguna Paling Aktif
-    st.subheader("👤 Top 10 Pengguna Paling Aktif")
+   st.subheader("👤 Top 10 Pengguna Paling Aktif")
+top_users = df["username"].value_counts().head(10)
+st.bar_chart(top_users)
