@@ -14,10 +14,17 @@ import os
 @st.cache_data
 def load_data():
     df = pd.read_csv("twitter_data_cleaned.csv.gz", compression="gzip", low_memory=False)
-
     # Konversi waktu & hapus "WIB"
     df["created_at"] = df["created_at"].astype(str).str.replace(" WIB", "", regex=False)
     df["created_at"] = pd.to_datetime(df["created_at"], errors="coerce")
+
+    # Isi nilai kosong dengan "Unknown"
+    df.fillna("Unknown", inplace=True)
+
+    return df  # Pastikan return sejajar dengan def
+
+# Panggil fungsi setelah definisi
+df = load_data()
 
     # Isi nilai kosong dengan "Unknown"
     df.fillna("Unknown", inplace=True)
