@@ -7,20 +7,22 @@ from textblob import TextBlob
 import swifter
 import os
 
-# =======================
-# 📌 1. Load Dataset (Cache)
-# =======================
 
+# =====================
+# 📌 1. Load Dataset (Cache)
+# =====================
 @st.cache_data
 def load_data():
     df = pd.read_csv("twitter_data_cleaned.csv.gz", compression="gzip", low_memory=False)
-    
+
     # Konversi waktu & hapus "WIB"
     df["created_at"] = df["created_at"].astype(str).str.replace(" WIB", "", regex=False)
     df["created_at"] = pd.to_datetime(df["created_at"], errors="coerce")
 
     # Isi nilai kosong dengan "Unknown"
     df.fillna("Unknown", inplace=True)
+
+    return df  # Pastikan return sejajar dengan def
 
 df = load_data()  # Panggil fungsi setelah definisi
 
