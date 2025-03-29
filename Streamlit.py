@@ -10,13 +10,19 @@ import os
 # =======================
 # 📌 1. Load Dataset (Cache)
 # =======================
+
 @st.cache_data
 def load_data():
-    file_path = "twitter_data_cleaned.csv.gz"
+    df = pd.read_csv("twitter_data_cleaned.csv.gz", compression="gzip", low_memory=False)
+    
+    # Konversi waktu & hapus "WIB"
+    df["created_at"] = df["created_at"].astype(str).str.replace(" WIB", "", regex=False)
+    df["created_at"] = pd.to_datetime(df["created_at"], errors="coerce")
 
-    if not os.path.exists(file_path):
-        st.error(f"❌ File '{file_path}' tidak ditemukan. Pastikan file ada di repositori GitHub!")
-        return None
+    # Isi nilai kosong dengan "Unknown"
+    df.fillna("Unknown", inplace=True)
+
+df = load_data()  # Panggil fungsi setelah definisi
 
     df = pd.read_csv("twitter_data_cleaned.csv.gz", compression="gzip", low_memory=False)
 print(df.head())
