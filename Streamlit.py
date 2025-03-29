@@ -39,6 +39,9 @@ print(df.head())
 df = load_data()
 if df is None:
     st.stop()
+    st.subheader("📌 Kolom dalam Dataset")
+st.write(df.columns.tolist())  # Menampilkan daftar nama kolom yang tersedia
+st.write(df.head())
 
 # =====================
 # 📌 2. Sidebar Navigation
@@ -75,10 +78,15 @@ if menu == "EDA":
     st.subheader("📊 Distribusi Retweets & Likes")
     st.write(df.columns)
     fig, ax = plt.subplots(1, 2, figsize=(12, 5))
-    sns.histplot(df["NAMA_KOLOM_YANG_BENAR"], bins=30, kde=True, ax=ax[0], color="blue")
-    ax[0].set_title("Distribusi Retweets")
+    if "retweets" in df.columns:
+    sns.histplot(df["retweets"], bins=30, kde=True, ax=ax[0], color="blue")
+else:
+    st.warning("⚠️ Kolom 'retweets' tidak ditemukan!")
+
+if "likes" in df.columns:
     sns.histplot(df["likes"], bins=30, kde=True, ax=ax[1], color="green")
-    ax[1].set_title("Distribusi Likes")
+else:
+    st.warning("⚠️ Kolom 'likes' tidak ditemukan!")
     st.pyplot(fig)
     print(df.columns)
 
