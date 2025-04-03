@@ -4,3 +4,4 @@ networkx
 TextBlob
 swifter
 python-louvain
+scipy
