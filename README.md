@@ -84,6 +84,7 @@ Sebelum menjalankan proyek ini, pastikan Anda telah menginstal dependensi yang d
 
 ### **2. Emotion Analysis**
 - **Tidak ada emosi yang terdeteksi dalam dataset ini**.
+- terlalu singkat pesan yang dikirimkan sehingga sulit menganalisis emosi user
 - Kemungkinan besar terjadi kesalahan dalam pemrosesan data atau model yang digunakan kurang sesuai.
 
 ### **3. Social Network Analysis**
