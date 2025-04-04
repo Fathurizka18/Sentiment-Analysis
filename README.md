@@ -13,7 +13,7 @@ Aplikasi ini dikembangkan menggunakan **Streamlit** untuk visualisasi yang inter
 ## **Struktur Proyek**
 ```
 |-- dataset/
-|   |-- twitter_data_cleaned.csv  # Dataset utama yang digunakan
+|   |-- twitter_data.csv  # Dataset utama yang digunakan
 |
 |-- notebooks/
 |   |-- eda.ipynb                 # Notebook EDA
